@@ -13,6 +13,8 @@ static uint8_t buttonPin = 21;
 static unsigned long pressDetectTime = 0;
 static uint8_t debounceTime = 25;
 
+bool buttonMqttPending = false;
+
 /* Setup button pin mode */
 void buttonSetup()
 {
@@ -42,6 +44,7 @@ void buttonTask()
     if ((millis() - pressDetectTime) > debounceTime) {
         if (pinVal != buttonPressed) {
             buttonPressed = pinVal;
+            buttonMqttPending = true;
             Serial.printf("Button Press: %d\n", buttonPressed);
         }
     }

@@ -5,9 +5,11 @@
  */
 
 #include "sensor.h"
+#include "mqtt.h"
 
 /* Global variables */
 bool sensorPresent = false;
+bool tempHumidityMqttPending = false;
 
 /* Static variables */
 static Adafruit_AHTX0 aht;                      // AHT20 sensor object
@@ -46,6 +48,17 @@ void sensorSetReadInterval(uint8_t sec)
     }
 }
 
+/* Return values */
+float sensorGetTemp()
+{
+    return temperature;
+}
+
+float sensorGetHumidity()
+{
+    return humidity;
+}
+
 /* Sensor task called from superloop */
 void sensorTask()
 {
@@ -54,6 +67,7 @@ void sensorTask()
         if ((millis() >= (lastReadTime + (readInterval * 1000))) || lastReadTime == 0) {
             sensorRead();
             lastReadTime = millis();
+            tempHumidityMqttPending = true;
             Serial.printf("Reading sensor: %lu\n", lastReadTime);
             Serial.printf("Temp: %.2f C, Humidity: %.2f rH\n", temperature, humidity);
         }

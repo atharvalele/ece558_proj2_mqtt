@@ -10,6 +10,8 @@
 
 #include <Arduino.h>
 
+extern bool buttonMqttPending;
+
 /* Functions */
 void buttonSetup();
 bool buttonGetStatus();

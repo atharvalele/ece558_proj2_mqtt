@@ -12,10 +12,13 @@
 
 /* Variables */
 extern bool sensorPresent;
+extern bool tempHumidityMqttPending;
 
 /* Functions */
 bool sensorSetup();
 void sensorTask();
 void sensorSetReadInterval(uint8_t sec);
+float sensorGetTemp();
+float sensorGetHumidity();
 
 #endif
