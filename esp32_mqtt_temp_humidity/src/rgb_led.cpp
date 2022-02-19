@@ -33,10 +33,10 @@ void LEDSetup()
     ledcAttachPin(LED_G_PIN, ledcLEDChannel_G);
     ledcAttachPin(LED_B_PIN, ledcLEDChannel_B);
 
-    /* Set initial colour to cyan */
-    LEDSetState(LED_R, 0);
-    LEDSetState(LED_G, 255);
-    LEDSetState(LED_B, 255);
+    /* Set initial colour to red */
+    LEDSetState(LED_R, 255);
+    LEDSetState(LED_G, 0);
+    LEDSetState(LED_B, 0);
 }
 
 /* Wrapper to set LED brightness */
