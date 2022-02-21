@@ -120,8 +120,10 @@
         android:id="@+id/intervalVal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Add code to fix text"
+        android:layout_marginTop="8dp"
+        android:text="5s"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -207,7 +209,7 @@
         app:trackColorInactive="#F44336" />
 
     <com.google.android.material.slider.Slider
-        android:id="@+id/greenLedSlider"
+        android:id="@+id/blueLedSlider"
         android:layout_width="300dp"
         android:layout_height="400dp"
         android:layout_marginTop="8dp"
@@ -218,14 +220,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/blueLedSlider"
+        app:layout_constraintTop_toBottomOf="@+id/greenLedSlider"
         app:thumbColor="#1976D2"
         app:tickColorInactive="#1976D2"
         app:trackColorActive="#1976D2"
         app:trackColorInactive="#1976D2" />
 
     <com.google.android.material.slider.Slider
-        android:id="@+id/blueLedSlider"
+        android:id="@+id/greenLedSlider"
         android:layout_width="300dp"
         android:layout_height="400dp"
         android:layout_marginTop="8dp"
