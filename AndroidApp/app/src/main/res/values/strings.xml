@@ -4,6 +4,7 @@
     <string name="tempHeaderText">Temperature</string>
     <string name="humHeaderText">Humidity</string>
     <string name="sensorIntervalText">Sensing Interval</string>
+    <string name="waitingText">N/C</string>
 
     <string name="buttonHeaderText">Push Button Status</string>
     <string name="buttonNotPresssed">Not Pressed</string>
