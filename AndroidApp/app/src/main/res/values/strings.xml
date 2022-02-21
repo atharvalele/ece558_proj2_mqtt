@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">MQTT IoT Demo</string>
+    <string name="sensorHeaderText">Sensors</string>
+    <string name="tempHeaderText">Temperature</string>
+    <string name="humHeaderText">Humidity</string>
+    <string name="sensorIntervalText">Sensing Interval</string>
+
+    <string name="buttonHeaderText">Push Button Status</string>
+    <string name="buttonNotPresssed">Not Pressed</string>
+    <string name="buttonPresssed">Pressed</string>
+
+    <string name="ledHeaderText">RGB LED</string>
+
+</resources>
