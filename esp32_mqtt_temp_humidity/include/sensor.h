@@ -18,6 +18,7 @@ extern bool tempHumidityMqttPending;
 bool sensorSetup();
 void sensorTask();
 void sensorSetReadInterval(uint8_t sec);
+uint8_t sensorGetReadInterval();
 float sensorGetTemp();
 float sensorGetHumidity();
 

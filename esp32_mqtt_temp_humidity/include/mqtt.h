@@ -28,6 +28,7 @@
 /* Functions */
 void mqttSetup();
 void mqttTask();
+void mqttPublishDevStatus();
 void mqttPublishTemp(float temp);
 void mqttPublishHumidity(float hum);
 void mqttPublishButton(bool state);

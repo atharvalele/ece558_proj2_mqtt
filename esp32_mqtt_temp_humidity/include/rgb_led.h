@@ -27,6 +27,9 @@ const uint8_t ledcLEDChannel_G = 1;
 const uint8_t ledcLEDChannel_B = 2;
 const uint8_t ledcResolution = 10;
 
+/* LED Brrightness */
+extern uint8_t ledBrightness[3];
+
 /* Functions */
 void LEDSetup();
 void LEDSetState(uint8_t led, uint8_t brightness);

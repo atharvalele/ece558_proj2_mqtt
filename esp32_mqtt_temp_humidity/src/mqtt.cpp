@@ -58,8 +58,17 @@ void onConnectionEstablished()
     mqttClient.subscribe(ledBTopic, ledBlueCallback);
     mqttClient.subscribe(intervalTopic, sensorIntervalCallback);
 
-    /* Publish device connected message */
-    mqttClient.publish(deviceStatusTopic, "1");
+    /* Publish device status message */
+    mqttPublishDevStatus();
+}
+
+void mqttPublishDevStatus()
+{
+    String dev_status = String(sensorGetReadInterval()) + "," + 
+                        String(ledBrightness[0]) + "," + String(ledBrightness[1]) + "," + String(ledBrightness[2]) + "," +
+                        String(buttonGetStatus()) + "," +
+                        String(sensorGetTemp()) + "," + String(sensorGetHumidity());
+    mqttClient.publish(deviceStatusTopic, dev_status);
 }
 
 void mqttPublishTemp(float temp)

@@ -12,9 +12,7 @@
 bool ledON_R = false;
 bool ledON_G = false;
 bool ledON_B = false;
-uint8_t ledR_brightness = 0;
-uint8_t ledG_brightness = 0;
-uint8_t ledB_brightness = 0;
+uint8_t ledBrightness[3];
 
 /* Dutycycle */
 bool dutyCycleIncrease = true;
@@ -42,5 +40,6 @@ void LEDSetup()
 /* Wrapper to set LED brightness */
 void LEDSetState(uint8_t led, uint8_t brightness)
 {
+    ledBrightness[led] = brightness;
     ledcWrite(led, brightness);
 }
