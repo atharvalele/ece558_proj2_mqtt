@@ -16,7 +16,7 @@ static Adafruit_AHTX0 aht;                      // AHT20 sensor object
 static sensors_event_t hum_event, temp_event;   // Humidity, Temperature events
 static float humidity, temperature;
 static unsigned long lastReadTime = 0;
-static uint8_t readInterval = 1;                // Default interval of 1s
+static uint8_t readInterval = 5;                // Default interval of 5s
 
 /* Setup sensor and return false if sensor not found */
 bool sensorSetup()
