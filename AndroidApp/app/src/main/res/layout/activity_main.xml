@@ -114,16 +114,16 @@
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sensorInterval"
-        android:valueFrom="5.0"
+        android:valueFrom="1.0"
         android:valueTo="120.0"
-        android:stepSize="5.0"/>
+        android:stepSize="1.0"/>
 
     <TextView
         android:id="@+id/intervalVal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="5s"
+        android:text="1s"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

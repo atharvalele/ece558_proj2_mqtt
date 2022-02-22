@@ -25,12 +25,7 @@ class MainActivity : AppCompatActivity() {
     // Temperature-Humidity Sensor values
     var temperature = 0.0f
     var humidity = 0.0f
-    var senseInterval = 5   // default of 5s
-
-    // LED Brightness values
-    var ledRedBrightness = 0
-    var ledGreenBrightness = 0
-    var ledBlueBrightness = 0
+    var senseInterval = 1   // default of 1s
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -102,10 +97,10 @@ class MainActivity : AppCompatActivity() {
 
             @SuppressLint("RestrictedApi")
             override fun onStopTrackingTouch(slider: Slider) {
-                val interval = slider.value.toInt()
-                Log.d("IntervalSlider", interval.toString())
-                binding.intervalVal.text = interval.toString() + "s"
-                setSensorInterval(interval)
+                senseInterval = slider.value.toInt()
+                Log.d("IntervalSlider", senseInterval.toString())
+                binding.intervalVal.text = senseInterval.toString() + "s"
+                setSensorInterval(senseInterval)
             }
         })
 
@@ -148,6 +143,10 @@ class MainActivity : AppCompatActivity() {
                 Log.d("B_Slider", slider.value.toInt().toString())
             }
         })
+
+        // C / F on click
+        binding.celsiusBtn.setOnClickListener{ setTempText(temperature) }
+        binding.fahrBtn.setOnClickListener{ setTempText(temperature) }
     }
 
     // Helper functions
@@ -218,6 +217,21 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             )
+
+            // Device status
+            mqttClient.subscribe(
+                topic = DEVICE_STATUS_TOPIC,
+                qos = 1,
+                object: IMqttActionListener {
+                    override fun onSuccess(asyncActionToken: IMqttToken?) {
+                        Log.d("MQTT", "Subscribed to device status")
+                    }
+
+                    override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
+                        Log.d("MQTT", "Could not subscribe to device status")
+                    }
+                }
+            )
         }
     }
 
@@ -225,19 +239,31 @@ class MainActivity : AppCompatActivity() {
     private fun handleMqttMessage(topic: String, message: String) {
         when (topic) {
             TEMPERATURE_TOPIC -> {
-                if (binding.celsiusBtn.isChecked) {
-                    binding.tempText.text = "$message °C"
-                } else {
-                    binding.tempText.text = "${cToF(message.toFloat())} °F"
-                }
+                temperature = message.toFloat()
+                setTempText(temperature)
             }
-
             HUMIDITY_TOPIC -> {
-                binding.humText.text = "$message % rH"
+                humidity = message.toFloat()
+                binding.humText.text = "$humidity % rH"
             }
-
             BUTTON_TOPIC -> {
                 binding.toggleButton2.isChecked = message == "1"
+            }
+            DEVICE_STATUS_TOPIC -> {
+                val status_values = message.split(',')
+
+                senseInterval = status_values[0].toInt()
+                binding.intervalSlider.value = senseInterval.toFloat()
+                binding.intervalVal.text = senseInterval.toString() + "s"
+                binding.redLedSlider.value = status_values[1].toFloat()
+                binding.greenLedSlider.value = status_values[2].toFloat()
+                binding.blueLedSlider.value = status_values[3].toFloat()
+                binding.toggleButton2.isChecked = status_values[4] == "1"
+                setTempText(status_values[5].toFloat())
+                humidity = status_values[6].toFloat()
+                binding.humText.text = "$humidity % rH"
+
+                Toast.makeText(this, "Device status updated!", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -247,6 +273,15 @@ class MainActivity : AppCompatActivity() {
         var fahrenheit = celsius
         fahrenheit = (fahrenheit * 9 / 5) + 32
         return fahrenheit
+    }
+
+    // Set temperature text function
+    private fun setTempText(tempCelsius: Float) {
+        if (binding.celsiusBtn.isChecked) {
+            binding.tempText.text = "$tempCelsius °C"
+        } else {
+            binding.tempText.text = "%.2f °F".format(cToF(tempCelsius))
+        }
     }
 
     // Publish sensor interval
