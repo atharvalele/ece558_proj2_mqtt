@@ -105,6 +105,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         // Setup RGB Sliders
+        binding.redLedSlider.setLabelFormatter { value: Float -> sliderPctCalc(value) }
         binding.redLedSlider.addOnSliderTouchListener(object: Slider.OnSliderTouchListener {
             @SuppressLint("RestrictedApi")
             override fun onStartTrackingTouch(slider: Slider) {
@@ -118,6 +119,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        binding.greenLedSlider.setLabelFormatter { value: Float -> sliderPctCalc(value) }
         binding.greenLedSlider.addOnSliderTouchListener(object: Slider.OnSliderTouchListener {
             @SuppressLint("RestrictedApi")
             override fun onStartTrackingTouch(slider: Slider) {
@@ -131,6 +133,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        binding.blueLedSlider.setLabelFormatter { value: Float -> sliderPctCalc(value) }
         binding.blueLedSlider.addOnSliderTouchListener(object: Slider.OnSliderTouchListener {
             @SuppressLint("RestrictedApi")
             override fun onStartTrackingTouch(slider: Slider) {
@@ -266,6 +269,19 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Device status updated!", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    // RGB percentage string getter
+    private fun sliderPctCalc(value: Float) : String {
+        var pct = ""
+        if (value == 0.0f) {
+            pct = "OFF"
+        } else {
+            val percent: Int = (value / 255 * 100).toInt()
+            pct = "$percent%"
+        }
+
+        return pct
     }
 
     // C to F converter
