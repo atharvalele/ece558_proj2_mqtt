@@ -207,7 +207,7 @@
         app:thumbColor="#E53935"
         app:tickColorInactive="#F44336"
         app:trackColorActive="#F44336"
-        app:trackColorInactive="#F44336" />
+        app:trackColorInactive="#FF8076" />
 
     <com.google.android.material.slider.Slider
         android:id="@+id/blueLedSlider"
@@ -224,7 +224,7 @@
         app:thumbColor="#1976D2"
         app:tickColorInactive="#1976D2"
         app:trackColorActive="#1976D2"
-        app:trackColorInactive="#1976D2" />
+        app:trackColorInactive="#80AAD3" />
 
     <com.google.android.material.slider.Slider
         android:id="@+id/greenLedSlider"
@@ -241,6 +241,6 @@
         app:thumbColor="#388E3C"
         app:tickColorInactive="#4CAF50"
         app:trackColorActive="#4CAF50"
-        app:trackColorInactive="#66BB6A" />
+        app:trackColorInactive="#95DF98" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
