@@ -6,11 +6,8 @@
 #include "rgb_led.h"
 #include "sensor.h"
 
-// #define WIFI_SSID "Y.A.A.S.2.4"
-// #define WIFI_PASS "Storyline@809"
-
-#define WIFI_SSID "BlueBlink"
-#define WIFI_PASS "1604SWGHP426"
+#define WIFI_SSID "WIFI_NAME"
+#define WIFI_PASS "WIFI_PASSWORD"
 
 /* Connect to WiFi */
 void wifiConnect()
